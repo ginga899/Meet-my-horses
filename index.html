@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>Meet my horses</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: sans-serif;
+    overflow-x: hidden;
+}
+
+/* HÁTTÉR */
+.bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 1s;
+}
+
+.bg1 { background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"); }
+.bg2 { background-image: url("https://images.unsplash.com/photo-1474511320723-9a56873867b5"); }
+.bg3 { background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb"); }
+
+.bg { opacity: 0; }
+.bg.active { opacity: 1; }
+
+/* FELSŐ SÁV */
+.topbar {
+    position: fixed;
+    width: 100%;
+    background: rgba(255,255,255,0.3);
+    text-align: center;
+    padding: 20px;
+    backdrop-filter: blur(6px);
+    z-index: 10;
+}
+
+/* CÍM */
+.title {
+    font-size: 50px;
+    color: white;
+    -webkit-text-stroke: 1px black;
+    display: inline-block;
+    transform: rotate(-5deg);
+    transition: 0.2s;
+}
+
+/* KURZOR MOZGÁS */
+body:hover .title {
+    transform: rotate(-5deg) translateX(5px);
+}
+
+/* KÖZÉPSŐ BOX */
+.center-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255,255,255,0.3);
+    padding: 30px;
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
+    text-align: center;
+    z-index: 5;
+}
+
+/* NEVEK */
+.name {
+    font-size: 22px;
+    margin: 8px;
+    cursor: pointer;
+}
+
+/* SHAKE */
+.name:hover {
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px); }
+    25% { transform: translate(-2px, -2px); }
+    50% { transform: translate(2px, 2px); }
+    75% { transform: translate(-2px, 2px); }
+    100% { transform: translate(1px, -1px); }
+}
+
+/* SCROLL TERÜLET */
+.scroll-space {
+    height: 300vh;
+}
+
+/* POPUP */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+
+.popup img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 10px;
+}
+
+/* KILÉPÉS */
+.popup:active {
+    display: none;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- HÁTTEREK -->
+<div class="bg bg1 active"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+
+<!-- FELSŐ SÁV -->
+<div class="topbar">
+    <div class="title">Meet my horses</div>
+</div>
+
+<!-- KÖZÉP -->
+<div class="center-box">
+
+     <div class="name" onclick="showImage('Animax.png')">
+        Animax
+    </div>
+     <div class="name" onclick="showImage('Ketamine.png')">
+        Ketamine
+    </div>
+     <div class="name" onclick="showImage('Mountaindew.png')">
+        Mountaindew
+    </div>
+     <div class="name" onclick="showImage('Speedy Gonzales.png')">
+        Speedy Gonzales
+    </div>
+     <div class="name" onclick="showImage('Lancelot.png')">
+        Lancelot
+    </div>
+     <div class="name" onclick="showImage('Soundwave.png')">
+        Soundwave
+    </div>
+     <div class="name" onclick="showImage('Soloto.png')">
+        Soloto
+    </div>
+     <div class="name" onclick="showImage('Circussa.png')">
+        Circussa
+    </div>
+     <div class="name" onclick="showImage('Generalix.png')">
+        Generalix
+    </div>
+     <div class="name" onclick="showImage('Valory.png')">
+        Valory
+    </div>
+     <div class="name" onclick="showImage('Daybreaker.png')">
+        Daybreaker
+    </div>
+     <div class="name" onclick="showImage('Cybertron.png')">
+        Cybertron
+    </div>
+     <div class="name" onclick="showImage('Doctor.png')">
+        Doctor
+    </div>
+     <div class="name" onclick="showImage('Aie.png')">
+        Aie
+    </div>
+     <div class="name" onclick="showImage('John Marston.png')">
+        John Marston
+    </div>
+    <div class="name">Arthur Morgan</div>
+
+    <!-- PÉLDA: EZ MŰKÖDIK -->
+    <div class="name" onclick="showImage('O-zone.png')">
+        O-zone
+    </div>
+
+</div>
+
+<div class="scroll-space"></div>
+
+<!-- POPUP -->
+<div class="popup" id="popup" onclick="closePopup()">
+    <img id="popupImg">
+</div>
+
+<script>
+
+/* SCROLL → HÁTTÉR VÁLTÁS */
+window.addEventListener("scroll", () => {
+    let scroll = window.scrollY;
+    let bgs = document.querySelectorAll(".bg");
+
+    bgs.forEach(bg => bg.classList.remove("active"));
+
+    if (scroll < 500) bgs[0].classList.add("active");
+    else if (scroll < 1000) bgs[1].classList.add("active");
+    else bgs[2].classList.add("active");
+});
+
+/* POPUP KÉP */
+function showImage(src) {
+    document.getElementById("popup").style.display = "flex";
+    document.getElementById("popupImg").src = src;
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
